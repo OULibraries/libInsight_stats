@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function libInsight_stats_views_api() {
+  return array(
+    'api' => 3.0
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function libInsight_stats_menu() {
+  /* proxy settings */
+  $items['admin/config/system/libInsight']
+    = array(
+    'title' => 'LibInsight Stats report settings',
+    'description' => 'Configure settings for LibInsight Stats reports',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('libInsight_stats_settings'),
+    'access arguments' => array('administer libInsight_stats settings'),
+    'weight' => -10,
+  );
+
+  return $items;
+}
+
+function libInsight_stats_permission() {
+  $modperms = array(
+    'administer libInsight_stats settings' => array(
+      'title' => t('Administer LibInsight Stats reports'),
+    ),
+  );
+  return $modperms;
+}
+
+function libInsight_stats_settings() {
+
+  $form = array();
+
+  $form['libInsight_stats_un'] = array(
+    '#type' => 'textfield',
+    '#title' => t('LibInsight Login Username'),
+    '#default_value' => variable_get('libInsight_stats_un', ""),
+    '#description' => t("Username used for libInsight login"),
+    '#required' => TRUE,
+  );
+  $form['libInsight_stats_pw'] = array(
+    '#type' => 'textfield',
+    '#title' => t('LibInsight Login Password'),
+    '#default_value' => variable_get('libInsight_stats_pw', ""),
+    '#description' => t("Password used for libInsight login"),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+
+}

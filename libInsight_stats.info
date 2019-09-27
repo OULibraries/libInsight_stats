@@ -1,0 +1,11 @@
+name = LibInsight Stats
+description = integration of LibInsight stats through csvs
+
+core = 7.x
+package = Drupal 7 Development
+
+files[] = libInsight_stats.module
+files[] = libInsight_stats.views.inc
+files[] = handlers/libInsight_stats_handler_field.inc
+files[] = plugins/libInsight_stats_plugin_query.inc
+files[] = handlers/libInsight_stats_field_option.inc
